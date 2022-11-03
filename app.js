@@ -4,8 +4,11 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const env = require("dotenv");
 
 const indexRouter = require("./routes/sendMail");
+
+env.config();
 
 const app = express();
 

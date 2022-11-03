@@ -1,10 +1,15 @@
 const SendMailService = require("../services/sendMail.service");
 
 const sendMail = (req, res) => {
-  console.log("Controller payload:", req.body);
   SendMailService.sendEmailViaAWS_SES(req.body, res);
 
-  return res.status(200).send("Send mail successfully");
+  const response = {
+    statusCode: 200,
+    data: req.body,
+    message: "Send mail contact successfully",
+  };
+
+  return res.status(200).send(response);
 };
 
 module.exports = { sendMail };

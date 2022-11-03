@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-const config = require("../config/default.ses.json");
+const config = require("../config/aws.ses");
 
 exports.sendEmailViaAWS_SES = (payload) => {
   console.log("Body:", payload);
@@ -21,20 +21,24 @@ exports.sendEmailViaAWS_SES = (payload) => {
         Html: {
           Charset: "UTF-8",
           Data:
-            "<html><h2>Contact of:</h2><h3>Full name:" +
+            "<html><h3>Full name: " +
             payload.fullName +
-            "</3><h2>Contact email from user: " +
+            "</h3><h3>Email of user: " +
             payload.email +
-            "</h2></html>",
+            "</h3><h3>Phone number: " +
+            payload.phoneNumber +
+            "</h3><h3>Message: " +
+            payload.message +
+            "</h3></html>",
         },
         Text: {
           Charset: "UTF-8",
-          Data: "Hey, this is test.",
+          Data: "Good morning!!!!!",
         },
       },
       Subject: {
         Charset: "UTF-8",
-        Data: "test",
+        Data: "User Send Contact with us",
       },
     },
     Source: "duytuanndt20@gmail.com",
@@ -44,7 +48,7 @@ exports.sendEmailViaAWS_SES = (payload) => {
 
   sendEmailReceiver
     .then((data) => {
-      console.log(data.MessageId);
+      console.log(data);
     })
     .catch((error) => {
       console.error(error, error.stack);
